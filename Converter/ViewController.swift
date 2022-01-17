@@ -6,14 +6,44 @@
 //
 
 import UIKit
+struct Price: Codable {
+    let EUR_USD: Double
+    
+}
 
 class ViewController: UIViewController {
-
+    
+    
+    @IBOutlet weak var InputValue: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
-
+    
+    
+    @IBAction func converterButton(_ sender: UIButton) {
+        let apiKey = "ffa83d008b1dd6279279"
+        let currency = Double(self.InputValue.text!)!
+        let url = URL(string: "https://free.currconv.com/api/v7/convert?q=EUR_usd&compact=ultra&apiKey="+apiKey)!
+        
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+            if let data = data {
+                do {
+                    let rest = try JSONDecoder().decode(Price.self, from: data)
+                    print(rest.EUR_USD * currency)
+                }
+                catch {
+                    return
+                }
+            }
+            
+            
+        }
+        
+        task.resume()
+    }
+    
+    
 }
 
