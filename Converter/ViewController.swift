@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func converterButton(_ sender: UIButton) {
-        let apiKey = "ffa83d008b1dd6279279"
+        let apiKey = "YOUR API KEY"
         let currency = Double(self.InputValue.text!)!
         let url = URL(string: "https://free.currconv.com/api/v7/convert?q=EUR_usd&compact=ultra&apiKey="+apiKey)!
         
