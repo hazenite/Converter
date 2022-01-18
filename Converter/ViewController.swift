@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     
     
     @IBOutlet weak var InputValue: UITextField!
-    
+    @IBOutlet weak var outputValue: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     
@@ -31,7 +31,13 @@ class ViewController: UIViewController {
             if let data = data {
                 do {
                     let rest = try JSONDecoder().decode(Price.self, from: data)
-                    print(rest.EUR_USD * currency)
+                    let saveValue = rest.EUR_USD * currency
+                    let convertToString =  String(saveValue)
+                    
+                    DispatchQueue.main.async {
+                        self.outputValue.text = "Kwota w dolarach: " + convertToString
+                    }
+                    
                 }
                 catch {
                     return
